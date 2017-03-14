@@ -50,7 +50,7 @@ namespace StudentManager
 
         public static List<Student> ReserializeMethod() 
         {
-            using (FileStream fs = new FileStream(@"c:\temp\student.dat", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(@"c:\temp\student.dat", FileMode.OpenOrCreate))//@"c:\temp\student.dat"
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 List<Student> list = (List<Student>)bf.Deserialize(fs);
@@ -80,12 +80,13 @@ namespace StudentManager
             
             //change
 
-            string name, sid, subs, sclass_name;
+            string name, sid, subs, sclass_name,collageName;
             bool gender;
             name = this.textBox1.Text;
             sid = this.textBox3.Text;
             subs = this.textBox5.Text;
             sclass_name = this.textBox2.Text;
+            collageName = this.comboBox1.Text;
             if (radioButton1.Checked == true)
             {
                 gender = true;
@@ -93,29 +94,30 @@ namespace StudentManager
             else gender = false;
 
 
-            Student student = new Student(name, sid, sclass_name, gender, subs);
+            Student student = new Student(name, sid, sclass_name, gender, subs,collageName);
 
 
-            //List<Student> last_list = new List<Student>();
-            //last_list = ReserializeMethod();
+    
             delete_list = ReserializeMethod();
 
-            if (changeOrDeleteFlag == false)
-            {
+           
                 foreach (Student item in delete_list)//遍历集合中的元素
                 {
                     if (student.sid == item.sid)
                     {
-                        //delete node
+                       
                         delete_list.Remove(item);
                         changeOrDeleteFlag = true;
                         list.Add(student);
                         AddToRoute(student);
+                        this.treeView1.SelectedNode.Remove(); //delete node
+                        SaveChange(delete_list, list);
+                        list.Clear();
                         MessageBox.Show("修改成功！");
                         break;
                     }
                    
-                }
+                
                  if(changeOrDeleteFlag == false) MessageBox.Show("学号无法修改！");
             }
            
@@ -131,16 +133,37 @@ namespace StudentManager
             sid = this.textBox3.Text;
             subs = this.textBox5.Text;
             sclass_name = this.textBox2.Text;
+            string collageName;
+            collageName = this.comboBox1.Text;
             if (radioButton1.Checked == true)
             {
                 gender = true;
             }
+                
             else gender = false;
-            Student student = new Student(name, sid, sclass_name,gender,subs);
-            list.Add(student);
-            AddToRoute(student);
-  
+            if (name == "" || sid == "")
+            {
+                MessageBox.Show("姓名，学号不能为空！");
             
+            }
+            else
+            {
+                Student student = new Student(name, sid, sclass_name, gender, subs, collageName);
+                list.Add(student);
+                AddToRoute(student);
+
+                List<Student> last_list = new List<Student>();
+                last_list = ReserializeMethod();
+                foreach (Student item in last_list)//遍历集合中的元素
+                {
+                    list.Add(item);
+                }
+                
+                SerializeMethod(list);
+                list.Clear();
+            }
+          
+
 
 
           //  if (sclass_name == "计算机科学与技术141")
@@ -149,30 +172,22 @@ namespace StudentManager
 
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+       
+        public bool SaveDeleteChange(List<Student> listssss)
         {
-            if (changeOrDeleteFlag == false)
-            {
-                List<Student> last_list = new List<Student>();
-                last_list = ReserializeMethod();
-                foreach (Student item in last_list)//遍历集合中的元素
-                {
-                    list.Add(item);
-                }
-                SerializeMethod(list);
-            }
-            else
-            {
-                foreach (Student item in delete_list)//遍历集合中的元素
-                {
-                    list.Add(item);
-                }
-                SerializeMethod(list);
+            SerializeMethod(listssss);
 
-            }
-           
+            return true;
         }
-
+        public bool SaveChange(List<Student> lista, List<Student> listb)
+        {
+            foreach (Student item in lista)//遍历集合中的元素
+            {
+                listb.Add(item);
+            }
+            SerializeMethod(listb);
+            return true;
+        }
         public void AddToRoute(Student student)
         {
             TreeNode MyNodes = new TreeNode();
@@ -217,6 +232,7 @@ namespace StudentManager
                         this.textBox2.Text = student.sclass;
                         this.textBox3.Text = student.sid;
                         this.textBox5.Text = student.subs;
+                        if (student.collage != null) this.comboBox1.Text = student.collage;
                         if (student.gender == true) this.radioButton1.Checked = true;
                         else this.radioButton2.Checked = true;
                     }
@@ -229,9 +245,9 @@ namespace StudentManager
         private void button3_Click(object sender, EventArgs e)
         {
             //delete
-           // TreeView treeView = (TreeView)sender;
-            //TreeNode selectedNode = treeView.SelectedNode;
-            //treeView.SelectedNode.Remove();
+
+     
+            
             string sid = this.textBox3.Text;
             if (sid == "") MessageBox.Show("双击选中删除的项目！");
             else
@@ -243,17 +259,21 @@ namespace StudentManager
                     {
                         delete_list.Remove(item);
                         changeOrDeleteFlag = true;
+                        this.treeView1.SelectedNode.Remove();
                         MessageBox.Show("删除成功！");
+                        SaveDeleteChange(delete_list);
+                        this.textBox1.Text = "";
+                        this.textBox2.Text = "";
+                        this.textBox3.Text = "";
+                        this.textBox5.Text = "";
+                        this.comboBox1.Text = "";
                         break;
                     }
                 }
                 if (changeOrDeleteFlag == false) MessageBox.Show("无法删除！");
             }
           
-            //this.Hide();   //先隐藏主窗体
-            //Form1 form1 = new Form1(); //重新实例化此窗体
-            //form1.ShowDialog();//已模式窗体的方法重新打开
-            //this.Close();//原窗体关闭
+          
         }
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

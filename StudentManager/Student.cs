@@ -21,10 +21,20 @@ namespace StudentManager
             this.subs = subs;
             this.gender = gender;
         }
+        public Student(string name, string sid, string sclass, bool gender, string subs,string collage)
+        {
+            this.name = name;
+            this.sid = sid;
+            this.sclass = sclass;
+            this.subs = subs;
+            this.gender = gender;
+            this.collage = collage;
+        }
         public string name;
         public string sid;
         public string sclass;
         public bool gender;
         public string subs;
+        public string collage;
     }
 }
