@@ -16,3 +16,4 @@ c:\users\administrator\documents\visual studio 2013\Projects\StudentManager\Stud
 \\psf\Home\Documents\Visual Studio 2013\Projects\StudentManager\StudentManager\StudentManager\obj\Debug\StudentManager.Form1.resources
 \\psf\Home\Documents\Visual Studio 2013\Projects\StudentManager\StudentManager\StudentManager\obj\Debug\StudentManager.Properties.Resources.resources
 \\psf\Home\Documents\Visual Studio 2013\Projects\StudentManager\StudentManager\StudentManager\obj\Debug\StudentManager.csproj.GenerateResource.Cache
+\\psf\Home\Documents\Visual Studio 2013\Projects\StudentManager\StudentManager\StudentManager\obj\Debug\StudentManager.InputBox.resources

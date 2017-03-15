@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace StudentManager
 {
+    [Serializable]
     public class Sclass
     {
-        string className;
-        string collageName;
+        public string className;
+        public string collageName;
         public Sclass() { }
         public Sclass(string className, string collageName)
         {
             this.className = className;
+            this.collageName = collageName;
+        }
+        public Sclass(String collageName)
+        {
             this.collageName = collageName;
         }
     }

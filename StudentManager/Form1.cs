@@ -22,23 +22,56 @@ namespace StudentManager
         public List<Sclass> class_list = new List<Sclass>();
         public List<Student> delete_list = new List<Student>();
         public bool changeOrDeleteFlag = false;
+        Sclass ssclass = new Sclass("计算机科学与技术143", "机电学院");
+        
         //Sclass ssclass = new Sclass("机电学院","计算机科学与技术141");
         //Sclass ssclass = new Sclass("机电学院", "计算机科学与技术142");
-        //Sclass ssclass = new Sclass("数理学院", "信息与科学技术141");
-       // List<Student> delete_list = ReserializeMethod();
+       // Sclass ssclass = new Sclass("法学院");
         public Form1()
         {
             InitializeComponent();
             panel1.Visible = false;
-    
+            
+            class_list = ReserializeClassMethod();
+            foreach (Sclass item in class_list)
+            {
+                if (item.className == null) this.treeView1.Nodes[0].Nodes.Add(item.collageName);//only collage
+              
+            }
+        
+            foreach (Sclass item in class_list) //item=[collagename,classname]
+            {
+                if (item.className != null)
+                {
+                    
+
+                    foreach (TreeNode tn in this.treeView1.Nodes[0].Nodes)
+                    {
+                       
+                        if (tn.Text == item.collageName)
+                        {
+                            TreeNode newnodes = new TreeNode();
+                            newnodes.Text = item.className;
+                            tn.Nodes.Add(newnodes);
+                            break;
+                        }
+                    }
+                }
+
+            }
+
             List<Student> last_list = ReserializeMethod();//调用反序列化的方法  其方法返回值是一个List集合
+            //MessageBox.Show(last_list.Count().ToString());
             foreach (Student item in last_list)//遍历集合中的元素
             {
                 AddToRoute(item);
             }
+            
+         
+           
          
         }
-        public static void SerializeMethod(List<Student> list)
+        public static void SerializeMethod(List<Student> list)  //序列化
         {
             using (FileStream fs = new FileStream(@"c:\temp\student.dat", FileMode.Create))  //@"d:\temp\student.dat"
             {
@@ -48,12 +81,32 @@ namespace StudentManager
         }
 
 
-        public static List<Student> ReserializeMethod() 
+        public static List<Student> ReserializeMethod()  //反序列化
         {
             using (FileStream fs = new FileStream(@"c:\temp\student.dat", FileMode.OpenOrCreate))//@"c:\temp\student.dat"
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 List<Student> list = (List<Student>)bf.Deserialize(fs);
+                return list;
+            }
+        }
+
+        public static void SerializeClassMethod(List<Sclass> list)
+        {
+            using (FileStream fs = new FileStream(@"c:\temp\classes.dat", FileMode.Create))  //@"d:\temp\student.dat"
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(fs, list);
+            }
+        }
+
+
+        public static List<Sclass> ReserializeClassMethod()
+        {
+            using (FileStream fs = new FileStream(@"c:\temp\classes.dat", FileMode.OpenOrCreate))//@"c:\temp\student.dat"
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                List<Sclass> list = (List<Sclass>)bf.Deserialize(fs);
                 return list;
             }
         }
@@ -126,7 +179,7 @@ namespace StudentManager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //add
+            //add student
             string name, sid, subs, sclass_name;
             bool gender;
             name = this.textBox1.Text;
@@ -141,35 +194,40 @@ namespace StudentManager
             }
                 
             else gender = false;
-            if (name == "" || sid == "")
+            if (name == "" || sid == "" ||collageName =="")
             {
-                MessageBox.Show("姓名，学号不能为空！");
+                MessageBox.Show("姓名，学号,系别不能为空！");
             
             }
             else
             {
+
                 Student student = new Student(name, sid, sclass_name, gender, subs, collageName);
-                list.Add(student);
-                AddToRoute(student);
+           
 
                 List<Student> last_list = new List<Student>();
                 last_list = ReserializeMethod();
+                int flag = 1;
+
                 foreach (Student item in last_list)//遍历集合中的元素
                 {
-                    list.Add(item);
+                  
+                    if (student.sid == item.sid)
+                    {
+                        MessageBox.Show("已存在此学号！");
+                        flag = 0;
+                        break;
+                    }
+
                 }
-                
-                SerializeMethod(list);
-                list.Clear();
+                if (flag == 1)
+                {
+                    AddToRoute(student);
+                    last_list.Add(student);
+                    SerializeMethod(last_list);
+                    MessageBox.Show("添加成功！");
+                }
             }
-          
-
-
-
-          //  if (sclass_name == "计算机科学与技术141")
-          //treeView1.Nodes[0].Nodes[0].Nodes[0].Nodes.Add(MyNodes);  //到计算机141层
-          //  else  treeView1.Nodes[0].Nodes[0].Nodes[1].Nodes.Add(MyNodes);   //计算机142层
-
         }
 
        
@@ -193,27 +251,20 @@ namespace StudentManager
             TreeNode MyNodes = new TreeNode();
             MyNodes.Text = student.name;
 
-            switch (student.sclass)
-            {
-                case "计算机科学与技术141":
-                    treeView1.Nodes[0].Nodes[0].Nodes[0].Nodes.Add(MyNodes);
-                    break;
-                case "计算机科学与技术142":
-                    treeView1.Nodes[0].Nodes[0].Nodes[1].Nodes.Add(MyNodes);
-                    break;
-                case "信息与计算科学141":
-                    treeView1.Nodes[0].Nodes[1].Nodes[0].Nodes.Add(MyNodes);
-                    break;
-                case "机械":
-                    treeView1.Nodes[0].Nodes[0].Nodes[3].Nodes.Add(MyNodes);
-                    break;
-                case "信息管理141":
-                    treeView1.Nodes[0].Nodes[0].Nodes[2].Nodes.Add(MyNodes);
-                    break;
-                //default:
-                //    MessageBox.Show("Error");
-                //    break;
-            }
+           
+                foreach(TreeNode  tn in this.treeView1.Nodes[0].Nodes)
+                {
+                    if (tn.Text == student.collage)
+                    {
+                        foreach (TreeNode tnx in tn.Nodes)
+                        {
+                            if (tnx.Text == student.sclass)
+                            {
+                                tnx.Nodes.Add(MyNodes);
+                            }
+                        }
+                    }
+                }
         }
 
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -304,5 +355,172 @@ namespace StudentManager
         {
 
         }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            
+            InputBox input = new InputBox();
+            DialogResult dr = input.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+               // MessageBox.Show(input.GetMsg());
+                AddClass(input.GetMsg());
+            }
+        }
+        private void AddClass(string name)
+        {
+            //add class
+            //todo 序列化和新建后立刻添加学生的处理
+            TreeNode td = new TreeNode();
+            td.Text = name;
+            this.treeView1.SelectedNode.Nodes.Add(td);
+            
+            Sclass s = new Sclass(name,this.treeView1.SelectedNode.Text); //todos
+            class_list = ReserializeClassMethod();
+            class_list.Add(s);
+            SerializeClassMethod(class_list);
+            class_list.Clear();
+                
+            
+        }
+        private void AddCollage(string name)
+        {
+            //add class
+            //todo 序列化和新建后立刻添加学生的处理
+            TreeNode td = new TreeNode();
+            td.Text = name;
+            this.treeView1.SelectedNode.Nodes.Add(td);
+            Sclass s = new Sclass(name);
+            class_list = ReserializeClassMethod();
+            class_list.Add(s);
+            SerializeClassMethod(class_list);
+            class_list.Clear();
+
+
+        }
+        private void treeView1_MouseDown(object sender, MouseEventArgs e) //treeview右击菜单选择事件
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                Point ClickPoint = new Point(e.X, e.Y);
+                TreeNode CurrentNode = treeView1.GetNodeAt(ClickPoint);
+                if (CurrentNode != null)//判断你点的是不是一个节点
+                {
+                    switch (CurrentNode.Level)//根据不同节点显示不同的右键菜单，当然你可以让它显示一样的菜单
+                    {
+                        case 1:
+                            CurrentNode.ContextMenuStrip = contextMenuStrip1;
+                            break;
+                        case 0:
+                             CurrentNode.ContextMenuStrip = contextMenuStrip2;
+                            break;
+                        case 2:
+                            CurrentNode.ContextMenuStrip = contextMenuStrip3;
+                            break;
+                    }
+                    treeView1.SelectedNode = CurrentNode;//选中这个节点
+                }
+            }
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //delete collage
+            class_list = ReserializeClassMethod();
+            foreach (Sclass sclass in class_list) 
+            {
+                if (sclass.collageName == this.treeView1.SelectedNode.Text && sclass.className == null)
+                {
+                    class_list.Remove(sclass);
+                    break;
+                }
+            }
+            SerializeClassMethod(class_list);
+       
+             
+            this.treeView1.SelectedNode.Remove();
+
+        }
+
+        private void addCollageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InputBox input = new InputBox();
+            DialogResult dr = input.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                // MessageBox.Show(input.GetMsg());
+                AddCollage(input.GetMsg());
+            }
+        }
+
+        private void DeleteClassContextMenuStrip(object sender, EventArgs e)
+        {
+            //delete class
+            if (this.treeView1.SelectedNode.Nodes.Count != 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("该节点非空，确认删除？", "Warnning", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    class_list = ReserializeClassMethod();
+                    foreach (Sclass sclass in class_list)
+                    {
+                        if (sclass.className == this.treeView1.SelectedNode.Text && sclass.collageName != null)
+                        {
+                            class_list.Remove(sclass);
+                            break;
+                        }
+                    }
+                    SerializeClassMethod(class_list);
+
+
+                    this.treeView1.SelectedNode.Remove();
+                }
+
+            }
+            else
+            {
+                class_list = ReserializeClassMethod();
+                foreach (Sclass sclass in class_list)
+                {
+                    if (sclass.className == this.treeView1.SelectedNode.Text && sclass.collageName != null)
+                    {
+                        class_list.Remove(sclass);
+                        break;
+                    }
+                }
+                SerializeClassMethod(class_list);
+
+
+                this.treeView1.SelectedNode.Remove();
+            }
+          
+        }
+
+        //private void contextMenuStrip2_MouseDown(object sender, MouseEventArgs e)
+        //{
+        //    if (e.Button == MouseButtons.Right)
+        //    {
+        //        Point ClickPoint = new Point(e.X, e.Y);
+        //        TreeNode CurrentNode = treeView1.GetNodeAt(ClickPoint);
+        //        if (CurrentNode != null)//判断你点的是不是一个节点
+        //        {
+        //            switch (CurrentNode.Level)//根据不同节点显示不同的右键菜单，当然你可以让它显示一样的菜单
+        //            {
+        //                case 1:
+        //                    CurrentNode.ContextMenuStrip = contextMenuStrip1;
+        //                    break;
+        //                case 0:
+        //                    CurrentNode.ContextMenuStrip = contextMenuStrip2;
+        //                    break;
+        //            }
+        //            treeView1.SelectedNode = CurrentNode;//选中这个节点
+        //        }
+        //    }
+        //}
+
+      
+
+   
+     
     }
 }

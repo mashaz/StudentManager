@@ -28,36 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("计算机科学与技术141");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("计算机科学与技术142");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("信息管理141");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("机械");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("机电学院", new System.Windows.Forms.TreeNode[] {
-            treeNode29,
-            treeNode30,
-            treeNode31,
-            treeNode32});
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("信息与计算科学141");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("数理学院", new System.Windows.Forms.TreeNode[] {
-            treeNode34});
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("外国语学院");
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("人文学院");
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("体育学院");
-            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("音乐学院");
-            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("美术学院");
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("经济管理学院");
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("绍兴文理学院", new System.Windows.Forms.TreeNode[] {
-            treeNode33,
-            treeNode35,
-            treeNode36,
-            treeNode37,
-            treeNode38,
-            treeNode39,
-            treeNode40,
-            treeNode41});
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("计算机科学与技术141");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("计算机科学与技术142");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("信息管理141");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("机械");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("机电学院", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("信息与计算科学141");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("数理学院", new System.Windows.Forms.TreeNode[] {
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("绍兴文理学院", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode7});
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -75,8 +66,13 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.添加学院ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除班级ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -84,6 +80,9 @@
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
+            this.contextMenuStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -109,40 +108,29 @@
             // 
             this.treeView1.Location = new System.Drawing.Point(3, 0);
             this.treeView1.Name = "treeView1";
-            treeNode29.Name = "节点7";
-            treeNode29.Text = "计算机科学与技术141";
-            treeNode30.Name = "节点0";
-            treeNode30.Text = "计算机科学与技术142";
-            treeNode31.Name = "节点9";
-            treeNode31.Text = "信息管理141";
-            treeNode32.Name = "节点8";
-            treeNode32.Text = "机械";
-            treeNode33.Name = "节点1";
-            treeNode33.Text = "机电学院";
-            treeNode34.Name = "节点1";
-            treeNode34.Text = "信息与计算科学141";
-            treeNode35.Name = "节点3";
-            treeNode35.Text = "数理学院";
-            treeNode36.Name = "节点4";
-            treeNode36.Text = "外国语学院";
-            treeNode37.Name = "节点5";
-            treeNode37.Text = "人文学院";
-            treeNode38.Name = "节点6";
-            treeNode38.Text = "体育学院";
-            treeNode39.Name = "节点0";
-            treeNode39.Text = "音乐学院";
-            treeNode40.Name = "节点1";
-            treeNode40.Text = "美术学院";
-            treeNode41.Name = "节点2";
-            treeNode41.Text = "经济管理学院";
-            treeNode42.Name = "";
-            treeNode42.Text = "绍兴文理学院";
+            treeNode1.Name = "节点7";
+            treeNode1.Text = "计算机科学与技术141";
+            treeNode2.Name = "节点0";
+            treeNode2.Text = "计算机科学与技术142";
+            treeNode3.Name = "节点9";
+            treeNode3.Text = "信息管理141";
+            treeNode4.Name = "节点8";
+            treeNode4.Text = "机械";
+            treeNode5.Name = "节点1";
+            treeNode5.Text = "机电学院";
+            treeNode6.Name = "节点1";
+            treeNode6.Text = "信息与计算科学141";
+            treeNode7.Name = "节点3";
+            treeNode7.Text = "数理学院";
+            treeNode8.Name = "";
+            treeNode8.Text = "绍兴文理学院";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode42});
+            treeNode8});
             this.treeView1.Size = new System.Drawing.Size(208, 614);
             this.treeView1.TabIndex = 0;
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+            this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
             // 
             // panel1
             // 
@@ -166,6 +154,32 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(415, 516);
             this.panel1.TabIndex = 15;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "机电学院",
+            "数理学院",
+            "外国语学院",
+            "人文学院",
+            "体育学院",
+            "音乐学院",
+            "美术学院",
+            "经济管理学院"});
+            this.comboBox1.Location = new System.Drawing.Point(133, 263);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 20);
+            this.comboBox1.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(58, 266);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 12);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "系别:";
             // 
             // label1
             // 
@@ -324,31 +338,55 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // label7
+            // contextMenuStrip1
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(58, 266);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 12);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "系别:";
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.addToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
             // 
-            // comboBox1
+            // toolStripMenuItem1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "机电学院",
-            "数理学院",
-            "外国语学院",
-            "人文学院",
-            "体育学院",
-            "音乐学院",
-            "美术学院",
-            "经济管理学院"});
-            this.comboBox1.Location = new System.Drawing.Point(133, 263);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 20);
-            this.comboBox1.TabIndex = 16;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem1.Text = "添加班级";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // addToolStripMenuItem
+            // 
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.addToolStripMenuItem.Text = "删除学院";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加学院ToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(125, 26);
+            // 
+            // 添加学院ToolStripMenuItem
+            // 
+            this.添加学院ToolStripMenuItem.Name = "添加学院ToolStripMenuItem";
+            this.添加学院ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.添加学院ToolStripMenuItem.Text = "添加学院";
+            this.添加学院ToolStripMenuItem.Click += new System.EventHandler(this.addCollageToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除班级ToolStripMenuItem});
+            this.contextMenuStrip3.Name = "contextMenuStrip3";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(125, 26);
+            // 
+            // 删除班级ToolStripMenuItem
+            // 
+            this.删除班级ToolStripMenuItem.Name = "删除班级ToolStripMenuItem";
+            this.删除班级ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.删除班级ToolStripMenuItem.Text = "删除班级";
+            this.删除班级ToolStripMenuItem.Click += new System.EventHandler(this.DeleteClassContextMenuStrip);
             // 
             // Form1
             // 
@@ -358,7 +396,6 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Form1";
-           // this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -368,6 +405,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
+            this.contextMenuStrip2.ResumeLayout(false);
+            this.contextMenuStrip3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -396,6 +436,13 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem 添加学院ToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem 删除班级ToolStripMenuItem;
 
     }
 }
